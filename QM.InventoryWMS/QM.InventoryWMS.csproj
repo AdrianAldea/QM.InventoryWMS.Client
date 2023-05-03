@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icons8-refresh-94.png" />
+    <None Remove="Resources\icons8-refresh-94.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\icons8-refresh-94.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Calculator\ExcelHelper\ExcelHelper.csproj" />
+    <ProjectReference Include="..\QM.Inventory.TunnelsClient\QM.Inventory.TunnelsClient.csproj" />
+    <ProjectReference Include="..\QM.InventoryWMS.BusinessLayer\QM.InventoryWMS.BusinessLayer.csproj" />
+    <ProjectReference Include="..\QM.InventoryWMS.Models\QM.InventoryWMS.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons8-refresh-94.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\AddUserWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\AddProductWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

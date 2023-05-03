@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QM.InventoryWMS", "QM.InventoryWMS\QM.InventoryWMS.csproj", "{AA53B829-9E90-412B-9062-28F6FE73FF30}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QM.InventoryWMS.Models", "QM.InventoryWMS.Models\QM.InventoryWMS.Models.csproj", "{B6A37A33-996F-4D0D-839B-421C21AB5E50}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QM.Inventory.TunnelsClient", "QM.Inventory.TunnelsClient\QM.Inventory.TunnelsClient.csproj", "{8BA90244-02E8-48AF-9F8D-E67A3AAFDD81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FE21AC0-F94C-457D-87D5-483B2831051B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		TODO.txt = TODO.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tunnels.Core", "..\QM.Inventory.API\Tunnels.Core\Tunnels.Core.csproj", "{65225C63-5E34-4718-A1F9-EBB2D977A338}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExcelHelper", "..\Calculator\ExcelHelper\ExcelHelper.csproj", "{8486E6DB-65E7-41BA-9A89-F2BC45849070}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA53B829-9E90-412B-9062-28F6FE73FF30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA53B829-9E90-412B-9062-28F6FE73FF30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA53B829-9E90-412B-9062-28F6FE73FF30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA53B829-9E90-412B-9062-28F6FE73FF30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6A37A33-996F-4D0D-839B-421C21AB5E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6A37A33-996F-4D0D-839B-421C21AB5E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6A37A33-996F-4D0D-839B-421C21AB5E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6A37A33-996F-4D0D-839B-421C21AB5E50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BA90244-02E8-48AF-9F8D-E67A3AAFDD81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA90244-02E8-48AF-9F8D-E67A3AAFDD81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BA90244-02E8-48AF-9F8D-E67A3AAFDD81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BA90244-02E8-48AF-9F8D-E67A3AAFDD81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65225C63-5E34-4718-A1F9-EBB2D977A338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65225C63-5E34-4718-A1F9-EBB2D977A338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65225C63-5E34-4718-A1F9-EBB2D977A338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65225C63-5E34-4718-A1F9-EBB2D977A338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8486E6DB-65E7-41BA-9A89-F2BC45849070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8486E6DB-65E7-41BA-9A89-F2BC45849070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8486E6DB-65E7-41BA-9A89-F2BC45849070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8486E6DB-65E7-41BA-9A89-F2BC45849070}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E8D8434-CA84-4B15-BB6B-5562F8B8312A}
+	EndGlobalSection
+EndGlobal
