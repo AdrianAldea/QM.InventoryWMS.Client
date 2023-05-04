@@ -48,6 +48,7 @@ namespace QM.InventoryWMS {
                 dpEndDate.Visibility = Visibility.Visible;
                 cbProduct.Visibility = Visibility.Visible;
                 tbOrderId.Visibility = Visibility.Visible;
+                rbDateAndProduct.Visibility = Visibility.Visible;
             }
             else {
                 btnAddProduct.Visibility = Visibility.Hidden;
@@ -68,6 +69,7 @@ namespace QM.InventoryWMS {
                 dpEndDate.Visibility = Visibility.Hidden;
                 cbProduct.Visibility = Visibility.Hidden;
                 tbOrderId.Visibility = Visibility.Hidden;
+                rbDateAndProduct.Visibility = Visibility.Hidden;
             }
         }
 
@@ -75,8 +77,8 @@ namespace QM.InventoryWMS {
         private async void btnAddProduct_Click(object sender, RoutedEventArgs e) {
             ProductsWindow products = new(User);
             products.ShowDialog();
-            cbProduct.ItemsSource = await TunnelsClient.GetAllProductsAsync(cbIsActive.IsChecked);
-            LoadOrdersDataGrid();
+            cbProduct.ItemsSource = await TunnelsClient.GetAllProductsAsync(null);
+            //LoadOrdersDataGrid();
         }
 
 
@@ -112,7 +114,7 @@ namespace QM.InventoryWMS {
         private async void Window_Loaded(object sender, RoutedEventArgs e) {
             ReloadUI();
             cbProduct.ItemsSource = await TunnelsClient.GetAllProductsAsync((bool?)cbIsActive.IsChecked);
-            LoadOrdersDataGrid();
+            //LoadOrdersDataGrid();
         }
 
         private async void btnFilter_Click(object sender, RoutedEventArgs e) {
@@ -233,6 +235,10 @@ namespace QM.InventoryWMS {
         private void tbOrderId_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e) {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private async void cbProduct_Loaded(object sender, RoutedEventArgs e) {
+            cbProduct.ItemsSource = await TunnelsClient.GetAllProductsAsync(null);
         }
     }
 }

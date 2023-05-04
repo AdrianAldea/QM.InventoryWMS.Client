@@ -32,6 +32,8 @@ namespace QM.InventoryWMS.Controls {
                     DateAdded = DateTime.Now,
                     DistributionCompany = tbDistrCompany.Text,
                     Name = tbProductName.Text,
+                    CurrentQuantity = Convert.ToDouble(tbQuantity.Text),
+                    InitialQuantity = Convert.ToDouble(tbQuantity.Text),
                     Type = cbProductType.Text
                 },
                 DateAdded = DateTime.Now,

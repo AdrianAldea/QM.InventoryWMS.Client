@@ -1,5 +1,4 @@
 ﻿using QM.Inventory.TunnelsClient;
-using QM.InventoryWMS.BusinessLayer.Services;
 using System;
 using System.Collections.Generic;
 using System.Windows;

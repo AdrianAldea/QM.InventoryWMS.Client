@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QM.InventoryWMS"
         mc:Ignorable="d"
-        Title="QM Inventory Manager" Height="476" Width="1230" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closed="Window_Closed">
+        Title="QM Inventory Manager" Height="476" Width="1363" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closed="Window_Closed">
     <Window.Resources>
         <Style TargetType="DataGridRow">
             <Style.Triggers>
@@ -46,7 +46,7 @@
         <Label x:Name="lblProduct" Content="ByProduct: " HorizontalAlignment="Left" Margin="256,9,0,0" VerticalAlignment="Top" Width="80"/>
         <Label x:Name="lblOrder" Content="ByOrderId: " HorizontalAlignment="Left" Margin="256,37,0,0" VerticalAlignment="Top" Width="80"/>
         <ComboBox x:Name="cbProduct" DisplayMemberPath="Name" SelectedValue="Id" SelectedItem="{Binding SelectedProduct}"
-                  HorizontalAlignment="Left" Margin="342,14,0,0" VerticalAlignment="Top" Width="184" SelectionChanged="cbProduct_SelectionChanged"/>
+                  HorizontalAlignment="Left" Margin="342,14,0,0" VerticalAlignment="Top" Width="184" SelectionChanged="cbProduct_SelectionChanged" Loaded="cbProduct_Loaded"/>
         <TextBox x:Name="tbOrderId" PreviewTextInput="tbOrderId_PreviewTextInput" HorizontalAlignment="Left" Margin="342,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" TextChanged="tbOrderId_TextChanged"/>
         <Button x:Name="btnFilter" Margin="531,1,0,0" Click="btnFilter_Click" Height="59" VerticalAlignment="Top" HorizontalAlignment="Left" Width="67" BorderThickness="0,0,0,0">
             <Button.Background>

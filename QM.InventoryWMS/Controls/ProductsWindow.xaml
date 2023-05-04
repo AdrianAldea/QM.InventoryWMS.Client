@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QM.InventoryWMS.Controls"
         mc:Ignorable="d"
-        Title="Products Manager" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Products Manager" Height="450" Width="854" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>

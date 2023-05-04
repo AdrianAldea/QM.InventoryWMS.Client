@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\QM.Inventory.API\Tunnels.Core\Tunnels.Core.csproj" />
+    <ProjectReference Include="..\..\QM.Tunnles.API\Tunnels.Core\Tunnels.Core.csproj" />
   </ItemGroup>
 
 </Project>
