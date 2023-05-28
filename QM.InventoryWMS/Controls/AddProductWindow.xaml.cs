@@ -34,6 +34,8 @@ namespace QM.InventoryWMS.Controls {
                     Name = tbProductName.Text,
                     CurrentQuantity = Convert.ToDouble(tbQuantity.Text),
                     InitialQuantity = Convert.ToDouble(tbQuantity.Text),
+                    CurrentValue = Convert.ToDouble(tbQuantity.Text) * Convert.ToDouble(tbBuyPrice.Text),
+                    BuyPrice = Convert.ToDouble(tbBuyPrice.Text),
                     Type = cbProductType.Text
                 },
                 DateAdded = DateTime.Now,
@@ -45,7 +47,7 @@ namespace QM.InventoryWMS.Controls {
             await TunnelsClient.CreateOrderWithProductAsync(new Order() {
                 UserId = currentUser.Id,
                 DateAdded = DateTime.Now,
-                OperationType = OperationTypeEnum.OUT,
+                OperationType = OperationTypeEnum.IN,
                 Price = -Convert.ToDouble(tbBuyPrice.Text),
                 Quantity = Convert.ToDouble(tbQuantity.Text),
                 Total = Convert.ToDouble(tbQuantity.Text) * -Convert.ToDouble(tbBuyPrice.Text),

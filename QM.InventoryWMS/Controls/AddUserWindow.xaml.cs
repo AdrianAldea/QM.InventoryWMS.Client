@@ -29,7 +29,6 @@ namespace QM.InventoryWMS.Controls {
         }
 
         private async void btnAddUser_Click(object sender, RoutedEventArgs e) {
-
             await TunnelsClient.CreateUser(new User {
                 DateAdded = DateTime.Now,
                 Username = tbUsername.Text,
@@ -37,6 +36,8 @@ namespace QM.InventoryWMS.Controls {
                 Password = tbPassword.Text,
                 Role = (RolesEnum)cbRole.SelectedIndex
             });
+            ListUsers = await TunnelsClient.GetAllUsersAsync();
+            dgUsers.ItemsSource = ListUsers;
         }
 
         public void DeleteSelectedProduct(object sender, RoutedEventArgs e) {

@@ -10,6 +10,9 @@
     <Compile Update="Controls\Charts.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\ChartsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="LogInWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,6 +25,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Controls\Charts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\ChartsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="LogInWindow.xaml">

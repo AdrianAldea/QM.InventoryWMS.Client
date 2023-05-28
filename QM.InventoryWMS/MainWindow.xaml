@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QM.InventoryWMS"
         mc:Ignorable="d"
-        Title="QM Inventory Manager" Height="476" Width="1363" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closed="Window_Closed">
+        Title="QM Inventory Manager" Height="512" Width="1363" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closed="Window_Closed">
     <Window.Resources>
         <Style TargetType="DataGridRow">
             <Style.Triggers>
@@ -15,9 +15,13 @@
                 <DataTrigger Binding="{Binding OperationType}" Value="OUT">
                     <Setter Property="Background" Value="LightSeaGreen" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding IsActive}" Value="false">
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=IsActive}" Value="false" />
+                        <Condition Binding="{Binding Path=OperationType}" Value="OUT" />
+                    </MultiDataTrigger.Conditions>
                     <Setter Property="Background" Value="IndianRed" />
-                </DataTrigger>
+                </MultiDataTrigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
@@ -30,21 +34,21 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="dgOrders" CanUserAddRows="false" IsReadOnly="true" d:ItemsSource="{Binding OrdersList}" Grid.Column="0" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+        <DataGrid x:Name="dgOrders" IsHitTestVisible="False" CanUserAddRows="false" IsReadOnly="true" d:ItemsSource="{Binding OrdersList}" Grid.Column="0" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
 
         </DataGrid>
-        <Button x:Name="btnAddProduct" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Content="Manage Products" Margin="10,10,10,0" Height="34" VerticalAlignment="Top" Click="btnAddProduct_Click"/>
-        <Button x:Name="btnManageUsers" Grid.Column="1" Grid.Row="0" Content="Users Manager" Margin="10,49,10,0" VerticalAlignment="Top" Click="btnManageUsers_Click" Height="34"/>
-        <Button x:Name="btnSaveAsExcel" Grid.Column="1" Content="Save As Excel" Margin="10,88,10,0" VerticalAlignment="Top" Click="btnSaveAsExcel_Click" Height="34" Grid.RowSpan="2"/>
+        <Button x:Name="btnAddProduct" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Content="Manager Produse" Margin="10,10,10,0" Height="34" VerticalAlignment="Top" Click="btnAddProduct_Click"/>
+        <Button x:Name="btnManageUsers" Grid.Column="1" Grid.Row="0" Content="Manager Useri" Margin="10,49,10,0" VerticalAlignment="Top" Click="btnManageUsers_Click" Height="34"/>
+        <Button x:Name="btnSaveAsExcel" Grid.Column="1" Content="Salveaza ca fisier Excel" Margin="10,88,10,0" VerticalAlignment="Top" Click="btnSaveAsExcel_Click" Height="34" Grid.RowSpan="2"/>
         <Label x:Name="lblConnectedUser" Grid.Column="1" Content="Please LogIn !" HorizontalAlignment="Left" Margin="10,0,0,88" Width="140" Height="26" VerticalAlignment="Bottom" Grid.Row="1"/>
-        <Button x:Name="btnLogin" Grid.Column="1" Content="LogIn" Margin="10,0,10,48"  Click="btnLogin_Click" Grid.Row="1" Height="35" VerticalAlignment="Bottom"/>
-        <Button x:Name="btnLogout" Grid.Column="1" Content="LogOut" Margin="10,0,10,10" Click="btnLogout_Click" Grid.Row="1" Height="33" VerticalAlignment="Bottom"/>
-        <Label x:Name="lblStartDate" Content="Start Date: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblEndDate" Content="End Date: " HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnLogin" Grid.Column="1" Content="Logare" Margin="10,0,10,48"  Click="btnLogin_Click" Grid.Row="1" Height="35" VerticalAlignment="Bottom"/>
+        <Button x:Name="btnLogout" Grid.Column="1" Content="Delogare" Margin="10,0,10,10" Click="btnLogout_Click" Grid.Row="1" Height="33" VerticalAlignment="Bottom"/>
+        <Label x:Name="lblStartDate" Content="Data Start: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblEndDate" Content="Data Sfarsit: " HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="dpStartDate" Tag="StartDate" HorizontalAlignment="Left" Margin="78,10,0,0" VerticalAlignment="Top" Width="165" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
         <DatePicker x:Name="dpEndDate" Tag="EndDate" HorizontalAlignment="Left" Margin="78,39,0,0" VerticalAlignment="Top" Width="165" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
-        <Label x:Name="lblProduct" Content="ByProduct: " HorizontalAlignment="Left" Margin="256,9,0,0" VerticalAlignment="Top" Width="80"/>
-        <Label x:Name="lblOrder" Content="ByOrderId: " HorizontalAlignment="Left" Margin="256,37,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label x:Name="lblProduct" Content="Produs: " HorizontalAlignment="Left" Margin="256,9,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label x:Name="lblOrder" Content="Nr bon: " HorizontalAlignment="Left" Margin="256,37,0,0" VerticalAlignment="Top" Width="80"/>
         <ComboBox x:Name="cbProduct" DisplayMemberPath="Name" SelectedValue="Id" SelectedItem="{Binding SelectedProduct}"
                   HorizontalAlignment="Left" Margin="342,14,0,0" VerticalAlignment="Top" Width="184" SelectionChanged="cbProduct_SelectionChanged" Loaded="cbProduct_Loaded"/>
         <TextBox x:Name="tbOrderId" PreviewTextInput="tbOrderId_PreviewTextInput" HorizontalAlignment="Left" Margin="342,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" TextChanged="tbOrderId_TextChanged"/>
@@ -53,11 +57,20 @@
                 <ImageBrush ImageSource="/Resources/icons8-refresh-94.png"/>
             </Button.Background>
         </Button>
-        <RadioButton x:Name = "rbDate" IsEnabled="True" GroupName="Filter" Content="Filter by Date" HorizontalAlignment="Left" Margin="607,6,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="ByDate"/>
-        <RadioButton x:Name = "rbProduct" GroupName="Filter" Content="Filter by Product" HorizontalAlignment="Left" Margin="607,26,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="ByProductId"/>
-        <RadioButton x:Name = "rbOrder" GroupName="Filter" Content="Filter by OrderId" HorizontalAlignment="Left" Margin="771,7,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="ByOrderId"/>
-        <RadioButton x:Name = "rbNoFilter" GroupName="Filter" Content="No Filter" HorizontalAlignment="Left" Margin="771,27,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="NoFilter"/>
-        <CheckBox x:Name="cbIsActive" Content="Show Deleted" HorizontalAlignment="Left" Margin="771,48,0,0" VerticalAlignment="Top" IsThreeState="True" Click="cbIsActive_Click"/>
+        <RadioButton x:Name = "rbDate" IsEnabled="True" GroupName="Filter" Content="Filtrare dupa data" HorizontalAlignment="Left" Margin="607,6,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="ByDate"/>
+        <RadioButton x:Name = "rbProduct" GroupName="Filter" Content="Filtrare dupa produs" HorizontalAlignment="Left" Margin="607,26,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="ByProductId"/>
+        <RadioButton x:Name = "rbOrder" GroupName="Filter" Content="Filtrare dupa nr bon" HorizontalAlignment="Left" Margin="771,7,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="ByOrderId"/>
+        <RadioButton x:Name = "rbNoFilter" GroupName="Filter" Content="Fara filtrare" HorizontalAlignment="Left" Margin="771,27,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="NoFilter"/>
+        <CheckBox x:Name="cbIsActive" Content="Afiseaza produse sterse" HorizontalAlignment="Left" Margin="771,48,0,0" VerticalAlignment="Top" IsThreeState="True" Click="cbIsActive_Click"/>
         <RadioButton x:Name = "rbDateAndProduct" GroupName="Filter" Content="Filter by Date And Product" HorizontalAlignment="Left" Margin="607,46,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="ByDateAndProductId"/>
+        <Label Grid.Column="1" Content="Legenda:" HorizontalAlignment="Left" Margin="10,0,0,217" Grid.Row="1" RenderTransformOrigin="0.546,-0.654" Height="26" VerticalAlignment="Bottom"/>
+        <Button Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,192" Grid.Row="1" Width="52" Background="IndianRed" Height="20" VerticalAlignment="Bottom"/>
+        <Button Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,167" Grid.Row="1" Width="52" Background="Green" Height="20" VerticalAlignment="Bottom"/>
+        <Button Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,139" Grid.Row="1" Width="52" Background="LightSeaGreen" Height="23" VerticalAlignment="Bottom"/>
+        <Label Grid.Column="1" Content="Produs sters" HorizontalAlignment="Left" Margin="67,0,0,189" Grid.Row="1" VerticalAlignment="Bottom" RenderTransformOrigin="0.467,-0.191"/>
+        <Label Grid.Column="1" Content="Intrari" HorizontalAlignment="Left" Margin="67,0,0,164" Grid.Row="1" VerticalAlignment="Bottom"/>
+        <Label Grid.Column="1" Content="Iesiri" HorizontalAlignment="Left" Margin="67,0,0,139" Grid.Row="1" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="cbOperationType" SelectedIndex="1" HorizontalAlignment="Left" Margin="123,70,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbOperationType_SelectionChanged"/>
+        <Label x:Name="lblOperationType" Content="Tip tranzactie: " HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

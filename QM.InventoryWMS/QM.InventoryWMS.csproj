@@ -19,6 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="WPFLocalizeExtension" Version="3.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\QM.Calculator.Client\ExcelHelper\ExcelHelper.csproj" />
     <ProjectReference Include="..\QM.Inventory.TunnelsClient\QM.Inventory.TunnelsClient.csproj" />
     <ProjectReference Include="..\QM.InventoryWMS.Models\QM.InventoryWMS.Models.csproj" />

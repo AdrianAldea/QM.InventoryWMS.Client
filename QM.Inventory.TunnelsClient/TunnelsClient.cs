@@ -1,8 +1,8 @@
-﻿using System.Net.Http.Headers;
-using System.Configuration;
+﻿using System.Configuration;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text.Json;
 using Tunnels.Core.Models;
-using System.Net.Http.Json;
 using Tunnels.Core.Views;
 
 namespace QM.Inventory.TunnelsClient {

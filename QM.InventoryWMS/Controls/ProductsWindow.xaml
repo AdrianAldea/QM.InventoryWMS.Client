@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QM.InventoryWMS.Controls"
         mc:Ignorable="d"
-        Title="Products Manager" Height="450" Width="854" WindowStartupLocation="CenterScreen">
+        Title="Products Manager" Height="450" Width="1004" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -22,8 +22,8 @@
                             Width="140"/>
             </DataGrid.Columns>!-->
         </DataGrid>
-        <Button x:Name="btnAddProduct" Content="Add Product" Margin="10,10,10,0" VerticalAlignment="Top" Height="63" Click="btnAddProduct_Click" Grid.Column="1"/>
-        <Button x:Name="btnDeleteProduct" Content="Delete Product" Margin="10,78,10,0" VerticalAlignment="Top" Height="60" Click="btnDeleteProduct_Click" Grid.Column="1"/>
+        <Button x:Name="btnAddProduct" Content="Adauga produs" Margin="10,10,10,0" VerticalAlignment="Top" Height="63" Click="btnAddProduct_Click" Grid.Column="1"/>
+        <Button x:Name="btnDeleteProduct" Content="Stergere produs" Margin="10,78,10,0" VerticalAlignment="Top" Height="60" Click="btnDeleteProduct_Click" Grid.Column="1"/>
         <Button x:Name="btnClose" Content="Close" Margin="10,0,10,10" Click="btnClose_Click" Grid.Column="1" Height="60" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

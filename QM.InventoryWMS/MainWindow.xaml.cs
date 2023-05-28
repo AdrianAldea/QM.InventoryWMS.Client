@@ -5,6 +5,7 @@ using QM.InventoryWMS.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,7 @@ namespace QM.InventoryWMS {
         public MainWindow() {
             DataContext = this;
             InitializeComponent();
+            cbOperationType.ItemsSource = Enum.GetValues(typeof(OperationTypeEnum)).Cast<OperationTypeEnum>();
         }
         private async void LoadOrdersDataGrid() {
             OrdersWithProducts = await TunnelsClient.GetAllOrdersWithProductsByFilterAsync(Filter);
@@ -49,6 +51,8 @@ namespace QM.InventoryWMS {
                 cbProduct.Visibility = Visibility.Visible;
                 tbOrderId.Visibility = Visibility.Visible;
                 rbDateAndProduct.Visibility = Visibility.Visible;
+                lblOperationType.Visibility = Visibility.Visible;
+                cbOperationType.Visibility = Visibility.Visible;
             }
             else {
                 btnAddProduct.Visibility = Visibility.Hidden;
@@ -70,6 +74,8 @@ namespace QM.InventoryWMS {
                 cbProduct.Visibility = Visibility.Hidden;
                 tbOrderId.Visibility = Visibility.Hidden;
                 rbDateAndProduct.Visibility = Visibility.Hidden;
+                lblOperationType.Visibility = Visibility.Hidden;
+                cbOperationType.Visibility = Visibility.Hidden;
             }
         }
 
@@ -239,6 +245,10 @@ namespace QM.InventoryWMS {
 
         private async void cbProduct_Loaded(object sender, RoutedEventArgs e) {
             cbProduct.ItemsSource = await TunnelsClient.GetAllProductsAsync(null);
+        }
+
+        private void cbOperationType_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            Filter.OperationType = (OperationTypeEnum)(sender as ComboBox).SelectedItem;
         }
     }
 }
