@@ -138,7 +138,6 @@ namespace QM.InventoryWMS {
         private async void Window_Loaded(object sender, RoutedEventArgs e) {
             ReloadUI();
             cbProduct.ItemsSource = await TunnelsClient.GetAllProductsAsync((bool?)cbIsActive.IsChecked);
-            //LoadOrdersDataGrid();
         }
 
         private async void btnFilter_Click(object sender, RoutedEventArgs e) {
@@ -185,8 +184,7 @@ namespace QM.InventoryWMS {
                     }
                     break;
             }
-            LoadOrdersDataGrid();
-            
+            LoadOrdersDataGrid();            
         }
 
         private void CalculateTotal() {
@@ -204,26 +202,14 @@ namespace QM.InventoryWMS {
 
         private void rb_Checked(object sender, RoutedEventArgs e) {
             RadioButton? rb = sender as RadioButton;
-            switch (rb.Tag.ToString()) {
-                case "NoFilter":
-                    Filter.FilterType = FilterTypeEnum.NoFilter;
-                    break;
-                case "ByDate":
-                    Filter.FilterType = FilterTypeEnum.ByDate;
-                    break;
-                case "ByProductId":
-                    Filter.FilterType = FilterTypeEnum.ByProductId;
-                    break;
-                case "ByOrderId":
-                    Filter.FilterType = FilterTypeEnum.ByOrderId;
-                    break;
-                case "ByDateAndProductId":
-                    Filter.FilterType = FilterTypeEnum.ByDateAndProductId;
-                    break;
-                default:
-                    Filter.FilterType = FilterTypeEnum.NoFilter;
-                    break;
-            }
+            Filter.FilterType = (rb?.Tag.ToString()) switch {
+                "NoFilter" => (FilterTypeEnum?)FilterTypeEnum.NoFilter,
+                "ByDate" => (FilterTypeEnum?)FilterTypeEnum.ByDate,
+                "ByProductId" => (FilterTypeEnum?)FilterTypeEnum.ByProductId,
+                "ByOrderId" => (FilterTypeEnum?)FilterTypeEnum.ByOrderId,
+                "ByDateAndProductId" => (FilterTypeEnum?)FilterTypeEnum.ByDateAndProductId,
+                _ => (FilterTypeEnum?)FilterTypeEnum.NoFilter,
+            };
         }
 
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e) {
@@ -303,7 +289,7 @@ namespace QM.InventoryWMS {
                 }
             }
             else {
-                MessageBox.Show("Introdu numar bon");
+                MessageBox.Show("Introduceti numar bon !");
             }
         }
     }
