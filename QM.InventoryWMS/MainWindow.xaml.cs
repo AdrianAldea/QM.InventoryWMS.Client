@@ -16,7 +16,7 @@ namespace QM.InventoryWMS {
     public partial class MainWindow : Window {
         public User? User;
         private OrdersWithProductsFilterRequest Filter { get; set; } = new OrdersWithProductsFilterRequest();
-        private List<OrdersWithProductsView> OrdersWithProducts { get; set; }
+        private List<OrdersWithProductsView> OrdersWithProducts { get; set; } = new List<OrdersWithProductsView>();
         public Product SelectedProduct { get; set; }
         public List<Product> Products { get; set; }
         public int SelectedProductId { get; set; }
@@ -25,16 +25,31 @@ namespace QM.InventoryWMS {
             DataContext = this;
             InitializeComponent();
             cbOperationType.ItemsSource = Enum.GetValues(typeof(OperationTypeEnum)).Cast<OperationTypeEnum>();
+            if (cbIsActive.IsChecked != null) {
+                Filter.IsActive = !cbIsActive.IsChecked;
+            }
+            else {
+                Filter.IsActive = cbIsActive.IsChecked;
+            }
+
+            if (cbOrderIsActive.IsChecked != null) {
+                Filter.IsOrderActive = !cbOrderIsActive.IsChecked;
+            }
+            else {
+                Filter.IsOrderActive = cbOrderIsActive.IsChecked;
+            }
         }
         private async void LoadOrdersDataGrid() {
             OrdersWithProducts = await TunnelsClient.GetAllOrdersWithProductsByFilterAsync(Filter);
             dgOrders.ItemsSource = OrdersWithProducts;
+            CalculateTotal();
         }
         private void ReloadUI() {
             if (User?.Role == RolesEnum.User || User?.Role == RolesEnum.Administrator) {
                 btnAddProduct.Visibility = Visibility.Visible;
                 btnManageUsers.Visibility = Visibility.Visible;
                 btnSaveAsExcel.Visibility = Visibility.Visible;
+                btnDeleteOrder.Visibility = Visibility.Visible;
                 dgOrders.Visibility = Visibility.Visible;
                 btnFilter.Visibility = Visibility.Visible;
                 lblStartDate.Visibility = Visibility.Visible;
@@ -53,11 +68,13 @@ namespace QM.InventoryWMS {
                 rbDateAndProduct.Visibility = Visibility.Visible;
                 lblOperationType.Visibility = Visibility.Visible;
                 cbOperationType.Visibility = Visibility.Visible;
+                cbOrderIsActive.Visibility = Visibility.Visible;
             }
             else {
                 btnAddProduct.Visibility = Visibility.Hidden;
                 btnManageUsers.Visibility = Visibility.Hidden;
                 btnSaveAsExcel.Visibility = Visibility.Hidden;
+                btnDeleteOrder.Visibility = Visibility.Hidden;
                 dgOrders.Visibility = Visibility.Hidden;
                 btnFilter.Visibility = Visibility.Hidden;
                 lblStartDate.Visibility = Visibility.Hidden;
@@ -76,6 +93,7 @@ namespace QM.InventoryWMS {
                 rbDateAndProduct.Visibility = Visibility.Hidden;
                 lblOperationType.Visibility = Visibility.Hidden;
                 cbOperationType.Visibility = Visibility.Hidden;
+                cbOrderIsActive.Visibility = Visibility.Hidden;
             }
         }
 
@@ -168,6 +186,20 @@ namespace QM.InventoryWMS {
                     break;
             }
             LoadOrdersDataGrid();
+            
+        }
+
+        private void CalculateTotal() {
+            if (OrdersWithProducts.Any()) {
+                if (OrdersWithProducts.Where(x => x.OperationType == OperationTypeEnum.IN).Any())
+                    lblTotalIn.Content = OrdersWithProducts.Where(x => x.OperationType == OperationTypeEnum.IN).Sum(x => x.TotalProduct);
+                if (OrdersWithProducts.Where(x => x.OperationType == OperationTypeEnum.OUT).Any())
+                    lblTotalOut.Content = OrdersWithProducts.Where(x => x.OperationType == OperationTypeEnum.OUT).Sum(x => x.TotalProduct);
+            }
+            else {
+                lblTotalIn.Content = 0.ToString();
+                lblTotalOut.Content = 0.ToString();
+            }
         }
 
         private void rb_Checked(object sender, RoutedEventArgs e) {
@@ -249,6 +281,30 @@ namespace QM.InventoryWMS {
 
         private void cbOperationType_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             Filter.OperationType = (OperationTypeEnum)(sender as ComboBox).SelectedItem;
+        }
+
+        private void cbOrderIsActive_Click(object sender, RoutedEventArgs e) {
+            if (cbOrderIsActive.IsChecked != null) {
+                Filter.IsOrderActive = !cbOrderIsActive.IsChecked;
+            }
+            else {
+                Filter.IsOrderActive = cbOrderIsActive.IsChecked;
+            }
+        }
+
+        private async void btnDeleteOrder_Click(object sender, RoutedEventArgs e) {
+            if (tbOrderId.Text != "") {
+                var id = Convert.ToInt32(tbOrderId.Text);
+                if (MessageBox.Show($"Esti sigur ca vrei sa invalidezi bonul: {id} ?", "Invalidare bon", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) {
+                    return;
+                }
+                else {
+                    await TunnelsClient.InactivateOrder(Convert.ToInt32(tbOrderId.Text));
+                }
+            }
+            else {
+                MessageBox.Show("Introdu numar bon");
+            }
         }
     }
 }

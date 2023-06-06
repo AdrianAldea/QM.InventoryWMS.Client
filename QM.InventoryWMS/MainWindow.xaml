@@ -34,13 +34,14 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="dgOrders" IsHitTestVisible="False" CanUserAddRows="false" IsReadOnly="true" d:ItemsSource="{Binding OrdersList}" Grid.Column="0" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+        <DataGrid x:Name="dgOrders" IsHitTestVisible="False" CanUserAddRows="false" IsReadOnly="true" Grid.Column="0" Margin="10,10,10,10" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
 
         </DataGrid>
         <Button x:Name="btnAddProduct" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Content="Manager Produse" Margin="10,10,10,0" Height="34" VerticalAlignment="Top" Click="btnAddProduct_Click"/>
-        <Button x:Name="btnManageUsers" Grid.Column="1" Grid.Row="0" Content="Manager Useri" Margin="10,49,10,0" VerticalAlignment="Top" Click="btnManageUsers_Click" Height="34"/>
-        <Button x:Name="btnSaveAsExcel" Grid.Column="1" Content="Salveaza ca fisier Excel" Margin="10,88,10,0" VerticalAlignment="Top" Click="btnSaveAsExcel_Click" Height="34" Grid.RowSpan="2"/>
-        <Label x:Name="lblConnectedUser" Grid.Column="1" Content="Please LogIn !" HorizontalAlignment="Left" Margin="10,0,0,88" Width="140" Height="26" VerticalAlignment="Bottom" Grid.Row="1"/>
+        <Button x:Name="btnManageUsers" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Content="Manager Useri" Margin="10,49,10,0" VerticalAlignment="Top" Click="btnManageUsers_Click" Height="34"/>
+        <Button x:Name="btnSaveAsExcel" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Content="Salveaza ca fisier Excel" Margin="10,88,10,0" VerticalAlignment="Top" Click="btnSaveAsExcel_Click" Height="34"/>
+        <Button x:Name="btnDeleteOrder" Grid.Column="1"  Grid.RowSpan="2" Content="Invalideaza bon" Margin="10,128,10,0" VerticalAlignment="Top" Click="btnDeleteOrder_Click" Height="34" Grid.Row="0"/>
+        <Label x:Name="lblConnectedUser" Grid.Column="1"  Grid.Row="1" Content="Please LogIn !" HorizontalAlignment="Left" Margin="10,0,0,88" Width="140" Height="26" VerticalAlignment="Bottom"/>
         <Button x:Name="btnLogin" Grid.Column="1" Content="Logare" Margin="10,0,10,48"  Click="btnLogin_Click" Grid.Row="1" Height="35" VerticalAlignment="Bottom"/>
         <Button x:Name="btnLogout" Grid.Column="1" Content="Delogare" Margin="10,0,10,10" Click="btnLogout_Click" Grid.Row="1" Height="33" VerticalAlignment="Bottom"/>
         <Label x:Name="lblStartDate" Content="Data Start: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -62,7 +63,7 @@
         <RadioButton x:Name = "rbOrder" GroupName="Filter" Content="Filtrare dupa nr bon" HorizontalAlignment="Left" Margin="771,7,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="ByOrderId"/>
         <RadioButton x:Name = "rbNoFilter" GroupName="Filter" Content="Fara filtrare" HorizontalAlignment="Left" Margin="771,27,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="NoFilter"/>
         <CheckBox x:Name="cbIsActive" Content="Afiseaza produse sterse" HorizontalAlignment="Left" Margin="771,48,0,0" VerticalAlignment="Top" IsThreeState="True" Click="cbIsActive_Click"/>
-        <RadioButton x:Name = "rbDateAndProduct" GroupName="Filter" Content="Filter by Date And Product" HorizontalAlignment="Left" Margin="607,46,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="ByDateAndProductId"/>
+        <RadioButton x:Name = "rbDateAndProduct" GroupName="Filter" Content="Filtrare dupa data+produs" HorizontalAlignment="Left" Margin="607,46,0,0" VerticalAlignment="Top" Checked="rb_Checked" Tag="ByDateAndProductId"/>
         <Label Grid.Column="1" Content="Legenda:" HorizontalAlignment="Left" Margin="10,0,0,217" Grid.Row="1" RenderTransformOrigin="0.546,-0.654" Height="26" VerticalAlignment="Bottom"/>
         <Button Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,192" Grid.Row="1" Width="52" Background="IndianRed" Height="20" VerticalAlignment="Bottom"/>
         <Button Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,167" Grid.Row="1" Width="52" Background="Green" Height="20" VerticalAlignment="Bottom"/>
@@ -72,5 +73,8 @@
         <Label Grid.Column="1" Content="Iesiri" HorizontalAlignment="Left" Margin="67,0,0,139" Grid.Row="1" VerticalAlignment="Bottom"/>
         <ComboBox x:Name="cbOperationType" SelectedIndex="1" HorizontalAlignment="Left" Margin="123,70,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbOperationType_SelectionChanged"/>
         <Label x:Name="lblOperationType" Content="Tip tranzactie: " HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbOrderIsActive" Content="Afiseaza bonuri sterse" HorizontalAlignment="Left" Margin="771,68,0,0" VerticalAlignment="Top" IsThreeState="True" Click="cbOrderIsActive_Click"/>
+        <Label x:Name="lblTotalIn" Grid.Column="1" Content="0" HorizontalAlignment="Left" Margin="122,0,0,164" Grid.Row="1" VerticalAlignment="Bottom"/>
+        <Label x:Name="lblTotalOut" Grid.Column="1" Content="0" HorizontalAlignment="Left" Margin="122,0,0,139" Grid.Row="1" Height="26" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

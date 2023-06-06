@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System.Collections;
+using System.Configuration;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -114,6 +115,11 @@ namespace QM.Inventory.TunnelsClient {
 
         public static async Task DeleteProductById(int productId) {
             HttpResponseMessage response = await _HttpClient.DeleteAsync($"api/products/{productId}");
+            response.EnsureSuccessStatusCode();
+        }
+
+        public static async Task InactivateOrder(int orderId) {
+            HttpResponseMessage response = await _HttpClient.DeleteAsync($"api/orders/{orderId}");
             response.EnsureSuccessStatusCode();
         }
     }

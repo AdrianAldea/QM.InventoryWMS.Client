@@ -51,7 +51,8 @@ namespace QM.InventoryWMS.Controls {
                 Price = -Convert.ToDouble(tbBuyPrice.Text),
                 Quantity = Convert.ToDouble(tbQuantity.Text),
                 Total = Convert.ToDouble(tbQuantity.Text) * -Convert.ToDouble(tbBuyPrice.Text),
-                ProductsEntries = products
+                ProductsEntries = products,
+                IsActive = true
             });
             Close();
         }
