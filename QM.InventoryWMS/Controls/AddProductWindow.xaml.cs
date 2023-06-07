@@ -21,7 +21,7 @@ namespace QM.InventoryWMS.Controls {
 
             //Validate
             if (tbDistrCompany.Text == "" || tbProductName.Text == "" || tbQuantity.Text == "" || tbBuyPrice.Text == "") {
-                MessageBox.Show("Please fill all fields !");
+                MessageBox.Show("Completeaza toate campurile !");
                 return;
             }
 

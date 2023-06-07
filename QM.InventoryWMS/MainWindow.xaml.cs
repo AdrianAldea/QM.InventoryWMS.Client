@@ -143,43 +143,43 @@ namespace QM.InventoryWMS {
         private async void btnFilter_Click(object sender, RoutedEventArgs e) {
             // Validation TODO
             if (Filter.FilterType == null) {
-                MessageBox.Show("Select filter option !");
+                MessageBox.Show("Selecteaza o optiune de filtrare !");
                 return;
             }
             switch (Filter.FilterType.Value) {
                 case FilterTypeEnum.ByOrderId:
                     if (Filter.OrderId == null) {
-                        MessageBox.Show("Enter the ByOrderId !");
+                        MessageBox.Show("Introduceti numar bon !");
                         return;
                     }
                     break;
                 case FilterTypeEnum.ByProductId:
                     if (Filter.ProductId == null) {
-                        MessageBox.Show("Select the Product !");
+                        MessageBox.Show("Selecteaza produsul !");
                         return;
                     }
                     break;
                 case FilterTypeEnum.ByDate:
                     if (Filter.StartDate > Filter.EndDate) {
-                        MessageBox.Show("StartDate must be greater than EndDate or equal !");
+                        MessageBox.Show("Data de start e mai mare decat data de sfarsit !");
                         return;
                     }
                     if (Filter.StartDate == null || Filter.EndDate == null) {
-                        MessageBox.Show("Select StartDate and EndDate !");
+                        MessageBox.Show("Selecteaza data de start si de sfarsit !");
                         return;
                     }
                     break;
                 case FilterTypeEnum.ByDateAndProductId:
                     if (Filter.ProductId == null) {
-                        MessageBox.Show("Select the Product !");
+                        MessageBox.Show("Selecteaza produsul !");
                         return;
                     }
                     if (Filter.StartDate > Filter.EndDate) {
-                        MessageBox.Show("StartDate must be greater than EndDate or equal !");
+                        MessageBox.Show("Data de start e mai mare decat data de sfarsit !");
                         return;
                     }
                     if (Filter.StartDate == null || Filter.EndDate == null) {
-                        MessageBox.Show("Select StartDate and EndDate !");
+                        MessageBox.Show("Selecteaza data de start si de sfarsit !");
                         return;
                     }
                     break;
