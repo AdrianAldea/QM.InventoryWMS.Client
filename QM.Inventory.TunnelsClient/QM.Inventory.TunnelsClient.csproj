@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\QM.Tunnles.API\Tunnels.Core\Tunnels.Core.csproj" />
+    <ProjectReference Include="..\..\QM.Tunnels.API\Tunnels.Core\Tunnels.Core.csproj" />
   </ItemGroup>
 
 </Project>
