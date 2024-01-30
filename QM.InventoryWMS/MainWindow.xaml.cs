@@ -1,4 +1,5 @@
-﻿using ExcelHelper;
+﻿using DocumentFormat.OpenXml.Vml;
+using ExcelHelper;
 using Microsoft.Win32;
 using QM.Inventory.TunnelsClient;
 using QM.InventoryWMS.Controls;
@@ -41,6 +42,11 @@ namespace QM.InventoryWMS {
         }
         private async void LoadOrdersDataGrid() {
             OrdersWithProducts = await TunnelsClient.GetAllOrdersWithProductsByFilterAsync(Filter);
+            foreach (var item in OrdersWithProducts)
+            {
+                item.TotalProduct = Convert.ToDouble(item.TotalProduct.ToString("0.##"));
+                item.TotalOrder = Convert.ToDouble(item.TotalOrder.ToString("0.##"));
+            }
             dgOrders.ItemsSource = OrdersWithProducts;
             CalculateTotal();
         }
@@ -192,7 +198,7 @@ namespace QM.InventoryWMS {
                 if (OrdersWithProducts.Where(x => x.OperationType == OperationTypeEnum.IN).Any())
                     lblTotalIn.Content = OrdersWithProducts.Where(x => x.OperationType == OperationTypeEnum.IN).Sum(x => x.TotalProduct);
                 if (OrdersWithProducts.Where(x => x.OperationType == OperationTypeEnum.OUT).Any())
-                    lblTotalOut.Content = OrdersWithProducts.Where(x => x.OperationType == OperationTypeEnum.OUT).Sum(x => x.TotalProduct);
+                    lblTotalOut.Content = OrdersWithProducts.Where(x => x.OperationType == OperationTypeEnum.OUT).Sum(x => x.TotalProduct).ToString("0.##");
             }
             else {
                 lblTotalIn.Content = 0.ToString();
