@@ -1,4 +1,5 @@
 ﻿using QM.Inventory.TunnelsClient;
+using System;
 using System.Windows;
 using Tunnels.Core.Models;
 
@@ -15,7 +16,13 @@ namespace QM.InventoryWMS.Controls {
         }
 
         private async void LoadProductsDataGrid() {
-            dgProducts.ItemsSource = await TunnelsClient.GetAllProductsAsync(null);
+            var products = await TunnelsClient.GetAllProductsAsync(null);
+            foreach (var item in products)
+            {
+                item.CurrentValue = Convert.ToDouble(item.CurrentValue.ToString("0.##"));
+                item.CurrentQuantity = Convert.ToDouble(item.CurrentQuantity.ToString("0.##"));
+            }
+            dgProducts.ItemsSource = products;
         }
 
         private async void btnDeleteProduct_Click(object sender, RoutedEventArgs e) {
