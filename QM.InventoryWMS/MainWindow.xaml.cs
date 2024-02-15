@@ -291,7 +291,29 @@ namespace QM.InventoryWMS {
                     return;
                 }
                 else {
-                    await TunnelsClient.InactivateOrder(Convert.ToInt32(tbOrderId.Text));
+                    if (OrdersWithProducts.Any())
+                    {
+                        //var orders = await TunnelsClient.GetAllOrdersWithProductsByFilterAsync(new OrdersWithProductsFilterRequest
+                        //{
+                        //    OrderId = 4,
+                        //    FilterType = FilterTypeEnum.ByOrderId
+                        //});
+
+                        //var order = new Order()
+                        //{
+                        //    DateAdded = DateTime.Now,
+                        //    OperationType = OperationTypeEnum.OUT,
+                        //    Price = orders.FirstOrDefault().Price,
+                        //    Quantity = orders.FirstOrDefaulty,
+                        //    Total = products.Sum(x => x.Total),
+                        //    UserId = User.Id,
+                        //    ProductsEntries = products,
+                        //    IsActive = true
+                        //};
+                        //var orderCreated = await TunnelsClient.CreateOrderWithProductAsync(order);
+
+                        await TunnelsClient.InactivateOrder(Convert.ToInt32(tbOrderId.Text));
+                    }
                 }
             }
             else {

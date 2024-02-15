@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Configuration;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -17,6 +18,7 @@ namespace QM.Inventory.TunnelsClient {
                     _httpClient = new HttpClient {
                         BaseAddress = new Uri(uriString: Url)
                     };
+                    _httpClient.Timeout = TimeSpan.FromHours(1);
                     _httpClient.DefaultRequestHeaders.Accept.Clear();
                     _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 }
@@ -73,6 +75,23 @@ namespace QM.Inventory.TunnelsClient {
                 });
 
             return orders.Any() ? await Task.FromResult(result: orders) : await Task.FromResult(result: new List<OrdersWithProductsView>());
+        }
+
+        public static async Task<double> GetSumOfOrders(OrdersWithProductsFilterRequest ordersWithProductsFilter)
+        {
+            HttpResponseMessage response = await _HttpClient.PostAsJsonAsync($"api/orders/GetSumOfOrders", ordersWithProductsFilter);
+            response.EnsureSuccessStatusCode();
+
+            Stream responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            var sum = JsonSerializer.Deserialize<double>(
+                responseStream,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    DefaultBufferSize = 128
+                });
+
+            return sum;
         }
 
         public static async Task<List<Product>> GetAllProductsAsync(bool? isActive) {
