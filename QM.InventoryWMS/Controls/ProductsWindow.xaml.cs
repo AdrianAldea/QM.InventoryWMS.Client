@@ -1,6 +1,9 @@
 ﻿using QM.Inventory.TunnelsClient;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using Tunnels.Core.Models;
 
 namespace QM.InventoryWMS.Controls {
@@ -40,6 +43,24 @@ namespace QM.InventoryWMS.Controls {
 
         private void btnClose_Click(object sender, RoutedEventArgs e) {
             Close();
+        }
+
+        private void dgProducts_CellEditEnding(object sender, System.Windows.Controls.DataGridCellEditEndingEventArgs e)
+        {
+            var dataGrid = sender as DataGrid;
+            var element = (e.EditingElement as TextBox);
+
+            if (dataGrid.SelectedIndex > -1)
+            {
+                var selectedItem = dataGrid.SelectedItem as Product;
+
+            }
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var productList = dgProducts.Items.Cast<Product>();
+            await TunnelsClient.UpdateAllProductsAsync(productList);
         }
     }
 }

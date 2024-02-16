@@ -109,6 +109,12 @@ namespace QM.Inventory.TunnelsClient {
             return products.Any() ? await Task.FromResult(result: products) : await Task.FromResult(result: new List<Product>());
         }
 
+        public static async Task UpdateAllProductsAsync(IEnumerable<Product> products)
+        {
+            HttpResponseMessage response = await _HttpClient.PostAsJsonAsync($"api/products", products);
+            response.EnsureSuccessStatusCode();
+        }
+
         public static async Task<Order> CreateOrderWithProductAsync(Order product) {
             HttpResponseMessage response = await _HttpClient.PostAsJsonAsync($"api/orders", product);
             response.EnsureSuccessStatusCode();
