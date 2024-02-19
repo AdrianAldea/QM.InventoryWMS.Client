@@ -19,6 +19,19 @@ namespace QM.InventoryWMS.Controls {
             LoadProductsDataGrid();
         }
 
+        private void CalculateTotal()
+        {
+            if (dgProducts.Items.Count > 0)
+            {
+                lblSumValue.Content = dgProducts.ItemsSource.Cast<Product>().Sum(x => x.CurrentValue).ToString("0.##");
+
+            }
+            else
+            {
+                lblSumValue.Content = 0.ToString();
+            }
+        }
+
         private async void LoadProductsDataGrid() {
             var products = await TunnelsClient.GetAllProductsAsync(null);
             foreach (var item in products)
@@ -28,6 +41,8 @@ namespace QM.InventoryWMS.Controls {
             }
             Products = products;
             dgProducts.ItemsSource = products;
+
+            CalculateTotal();
         }
 
         private async void btnDeleteProduct_Click(object sender, RoutedEventArgs e) {
@@ -76,6 +91,8 @@ namespace QM.InventoryWMS.Controls {
                         dgProducts.ItemsSource = Products.FindAll(x => x.IsActive == false);
                         break;
                 }
+
+            CalculateTotal();
         }
     }
 }

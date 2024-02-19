@@ -1,8 +1,8 @@
 - autorize + token
 
 1 Editare produse in manager produse - done
-2 In manager produse adaugare buton pentru afisare produse doar cu stoc
-3 Numerotare produse si in calculator
+2 In manager produse adaugare buton pentru afisare produse doar cu stoc - done
+3 Numerotare produse si in calculator - done
 4 Afisare suma stoc curent(cum apare si la intrari si iesiri)
 5 Activare/dezactivare produse(momentan merge doar sters dar vreau sa activ si dez produse care inca nu le am bagat la vanzare sa nu apara in calculator doar in inventory)
 6 Tiparire stocuri

@@ -31,5 +31,7 @@
             <ComboBoxItem Content="Fara Stoc"/>
         </ComboBox>
         <Label Grid.Column="1" Content="Disponibilitate:" HorizontalAlignment="Left" Margin="10,208,0,0" VerticalAlignment="Top" Height="30" Width="92"/>
+        <Label Grid.Column="1" Content="Total:" Margin="10,0,203,75" Height="26" VerticalAlignment="Bottom"/>
+        <Label x:Name="lblSumValue" Grid.Column="1" Content="0" Margin="53,0,10,75" RenderTransformOrigin="-1.052,-0.322" Height="26" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
