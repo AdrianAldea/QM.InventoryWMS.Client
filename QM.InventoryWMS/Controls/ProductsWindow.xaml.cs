@@ -12,6 +12,7 @@ namespace QM.InventoryWMS.Controls {
     /// </summary>
     public partial class ProductsWindow : Window {
         private User currentUser { get; set; }
+        private List<Product> Products { get; set; }
         public ProductsWindow(User currentUser) {
             this.currentUser = currentUser;
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace QM.InventoryWMS.Controls {
                 item.CurrentValue = Convert.ToDouble(item.CurrentValue.ToString("0.##"));
                 item.CurrentQuantity = Convert.ToDouble(item.CurrentQuantity.ToString("0.##"));
             }
+            Products = products;
             dgProducts.ItemsSource = products;
         }
 
@@ -61,6 +63,19 @@ namespace QM.InventoryWMS.Controls {
         {
             var productList = dgProducts.Items.Cast<Product>();
             await TunnelsClient.UpdateAllProductsAsync(productList);
+        }
+
+        private void cbStock_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(Products != null)
+                switch (cbStock.SelectedIndex)
+                {
+                    case 0: dgProducts.ItemsSource = Products.FindAll(x => x.IsActive == true);
+                        break;
+                    case 1:
+                        dgProducts.ItemsSource = Products.FindAll(x => x.IsActive == false);
+                        break;
+                }
         }
     }
 }

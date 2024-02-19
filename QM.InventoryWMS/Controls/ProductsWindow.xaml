@@ -26,5 +26,10 @@
         <Button x:Name="btnDeleteProduct" Content="Stergere produs" Margin="10,78,10,0" VerticalAlignment="Top" Height="60" Click="btnDeleteProduct_Click" Grid.Column="1"/>
         <Button x:Name="btnClose" Content="Close" Margin="10,0,10,10" Click="btnClose_Click" Grid.Column="1" Height="60" VerticalAlignment="Bottom"/>
         <Button x:Name="btnUpdateProduct" Content="Salveaza schimbarile" Margin="10,143,10,0" VerticalAlignment="Top" Height="60" Click="btnUpdateProducts" Grid.Column="1"/>
+        <ComboBox x:Name="cbStock" Grid.Column="1" HorizontalAlignment="Left" Margin="121,210,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbStock_SelectionChanged">
+            <ComboBoxItem Content="In Stoc"/>
+            <ComboBoxItem Content="Fara Stoc"/>
+        </ComboBox>
+        <Label Grid.Column="1" Content="Disponibilitate:" HorizontalAlignment="Left" Margin="10,208,0,0" VerticalAlignment="Top" Height="30" Width="92"/>
     </Grid>
 </Window>
