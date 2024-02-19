@@ -1,1 +1,12 @@
 - autorize + token
+
+1 Editare produse in manager produse - done
+2 In manager produse adaugare buton pentru afisare produse doar cu stoc
+3 Numerotare produse si in calculator
+4 Afisare suma stoc curent(cum apare si la intrari si iesiri)
+5 Activare/dezactivare produse(momentan merge doar sters dar vreau sa activ si dez produse care inca nu le am bagat la vanzare sa nu apara in calculator doar in inventory)
+6 Tiparire stocuri
+7 Bara search manager produse
+8  Afisare profit produs
+9 Afisare in calculator cand se selecteaza un produs pt a fi batut sa apara sus numele produsului
+10 sa pot deschide mai multe bonuri simultan din acelasi calc de ex bon nr 1 nr 2 etc

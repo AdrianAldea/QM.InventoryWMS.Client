@@ -57,7 +57,7 @@ namespace QM.InventoryWMS.Controls {
             }
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void btnUpdateProducts(object sender, RoutedEventArgs e)
         {
             var productList = dgProducts.Items.Cast<Product>();
             await TunnelsClient.UpdateAllProductsAsync(productList);

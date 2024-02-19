@@ -25,15 +25,6 @@
         <Button x:Name="btnAddProduct" Content="Adauga produs" Margin="10,10,10,0" VerticalAlignment="Top" Height="63" Click="btnAddProduct_Click" Grid.Column="1"/>
         <Button x:Name="btnDeleteProduct" Content="Stergere produs" Margin="10,78,10,0" VerticalAlignment="Top" Height="60" Click="btnDeleteProduct_Click" Grid.Column="1"/>
         <Button x:Name="btnClose" Content="Close" Margin="10,0,10,10" Click="btnClose_Click" Grid.Column="1" Height="60" VerticalAlignment="Bottom"/>
-        <Button Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="10,168,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="160" Width="224" Click="Button_Click">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.383"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
+        <Button x:Name="btnUpdateProduct" Content="Salveaza schimbarile" Margin="10,143,10,0" VerticalAlignment="Top" Height="60" Click="btnUpdateProducts" Grid.Column="1"/>
     </Grid>
 </Window>
