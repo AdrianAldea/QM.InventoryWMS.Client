@@ -94,5 +94,18 @@ namespace QM.InventoryWMS.Controls {
 
             CalculateTotal();
         }
+
+        private void ckBeditMode_Checked(object sender, RoutedEventArgs e)
+        {
+            if(ckBeditMode.IsChecked == true)
+                dgProducts.IsReadOnly = false;
+
+        }
+
+        private void ckBeditMode_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (ckBeditMode.IsChecked == false)
+                dgProducts.IsReadOnly = true;
+        }
     }
 }

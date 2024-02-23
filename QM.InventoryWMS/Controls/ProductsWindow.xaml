@@ -11,7 +11,7 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dgProducts" Margin="10,10,10,10" CanUserAddRows="False" CellEditEnding="dgProducts_CellEditEnding">
+        <DataGrid x:Name="dgProducts" Margin="10,10,10,10" IsReadOnly="true" CanUserAddRows="False" CellEditEnding="dgProducts_CellEditEnding">
             <!--<DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="10*" />
                 <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="8*" />
@@ -25,7 +25,7 @@
         <Button x:Name="btnAddProduct" Content="Adauga produs" Margin="10,10,10,0" VerticalAlignment="Top" Height="63" Click="btnAddProduct_Click" Grid.Column="1"/>
         <Button x:Name="btnDeleteProduct" Content="Stergere produs" Margin="10,78,10,0" VerticalAlignment="Top" Height="60" Click="btnDeleteProduct_Click" Grid.Column="1"/>
         <Button x:Name="btnClose" Content="Close" Margin="10,0,10,10" Click="btnClose_Click" Grid.Column="1" Height="60" VerticalAlignment="Bottom"/>
-        <Button x:Name="btnUpdateProduct" Content="Salveaza schimbarile" Margin="10,143,10,0" VerticalAlignment="Top" Height="60" Click="btnUpdateProducts" Grid.Column="1"/>
+        <Button x:Name="btnUpdateProduct" Content="Salveaza schimbarile" Margin="100,143,10,0" VerticalAlignment="Top" Height="60" Click="btnUpdateProducts" Grid.Column="1"/>
         <ComboBox x:Name="cbStock" Grid.Column="1" HorizontalAlignment="Left" Margin="121,210,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbStock_SelectionChanged">
             <ComboBoxItem Content="In Stoc"/>
             <ComboBoxItem Content="Fara Stoc"/>
@@ -33,5 +33,6 @@
         <Label Grid.Column="1" Content="Disponibilitate:" HorizontalAlignment="Left" Margin="10,208,0,0" VerticalAlignment="Top" Height="30" Width="92"/>
         <Label Grid.Column="1" Content="Total:" Margin="10,0,203,75" Height="26" VerticalAlignment="Bottom"/>
         <Label x:Name="lblSumValue" Grid.Column="1" Content="0" Margin="53,0,10,75" RenderTransformOrigin="-1.052,-0.322" Height="26" VerticalAlignment="Bottom"/>
+        <CheckBox x:Name="ckBeditMode" Grid.Column="1" Content="Edit On/Off" HorizontalAlignment="Left" Margin="10,143,0,0" VerticalAlignment="Top" Width="85" Checked="ckBeditMode_Checked" Unchecked="ckBeditMode_Unchecked"/>
     </Grid>
 </Window>
