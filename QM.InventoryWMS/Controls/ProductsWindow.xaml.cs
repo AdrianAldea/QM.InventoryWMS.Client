@@ -146,5 +146,47 @@ namespace QM.InventoryWMS.Controls {
                 Process.Start(new ProcessStartInfo { FileName = saveFileDialog.FileName, UseShellExecute = true });
             }
         }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(tbSearchProduct.Text))
+            {
+                dgProducts.ItemsSource = null;
+                List<Product> sortedProducts = new List<Product>();
+                foreach (Product item in Products)
+                {
+                    if (item.Name.ToLower().StartsWith(tbSearchProduct.Text.ToLower()))
+                    {
+                        sortedProducts.Add(item);
+                    }
+                }
+                dgProducts.ItemsSource = sortedProducts;
+            }
+            else if (string.IsNullOrWhiteSpace(tbSearchProduct.Text))
+            {
+                dgProducts.ItemsSource = null;
+                List<Product> sortedProducts = new List<Product>();
+                foreach (Product item in Products)
+                {
+                    sortedProducts.Add(item);
+                }
+                dgProducts.ItemsSource = sortedProducts;
+            }
+        }
+        
+        private async void dgProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dgProducts.SelectedItem is Product selectedProduct)
+            {
+                List<Tunnels.Core.Views.OrdersWithProductsView> orders = await TunnelsClient.GetAllOrdersWithProductsByFilterAsync(
+                        new OrdersWithProductsFilterRequest
+                        {
+                            ProductId = selectedProduct.Id,
+                            FilterType = FilterTypeEnum.ByProductId,
+                            OperationType = OperationTypeEnum.OUT
+                        });
+                lblProfitValue.Content = (orders.Sum(x => x.TotalOrder) - (selectedProduct.BuyPrice * selectedProduct.InitialQuantity)).ToString("0.##");
+            }
+        }
     }
 }
