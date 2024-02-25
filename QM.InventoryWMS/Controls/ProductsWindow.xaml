@@ -5,7 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QM.InventoryWMS.Controls"
         mc:Ignorable="d"
-        Title="Products Manager" Height="450" Width="1004" WindowStartupLocation="CenterScreen">
+        Title="Products Manager" Height="520" Width="1004" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsActive}" Value="false">
+                    <Setter Property="Background" Value="IndianRed" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsActive}" Value="true">
+                    <Setter Property="Background" Value="LightSeaGreen" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -22,17 +34,19 @@
                             Width="140"/>
             </DataGrid.Columns>!-->
         </DataGrid>
-        <Button x:Name="btnAddProduct" Content="Adauga produs" Margin="10,10,10,0" VerticalAlignment="Top" Height="63" Click="btnAddProduct_Click" Grid.Column="1"/>
-        <Button x:Name="btnDeleteProduct" Content="Stergere produs" Margin="10,78,10,0" VerticalAlignment="Top" Height="60" Click="btnDeleteProduct_Click" Grid.Column="1"/>
-        <Button x:Name="btnClose" Content="Close" Margin="10,0,10,10" Click="btnClose_Click" Grid.Column="1" Height="60" VerticalAlignment="Bottom"/>
-        <Button x:Name="btnUpdateProduct" Content="Salveaza schimbarile" Margin="100,143,10,0" VerticalAlignment="Top" Height="60" Click="btnUpdateProducts" Grid.Column="1"/>
-        <ComboBox x:Name="cbStock" Grid.Column="1" HorizontalAlignment="Left" Margin="121,210,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbStock_SelectionChanged">
+        <Button x:Name="btnAddProduct" Content="Adauga produs" Margin="10,10,10,0" VerticalAlignment="Top" Height="45" Click="btnAddProduct_Click" Grid.Column="1"/>
+        <Button x:Name="btnDeleteProduct" Content="Stergere produs" Margin="10,60,10,0" VerticalAlignment="Top" Height="45" Click="btnDeleteProduct_Click" Grid.Column="1"/>
+        <Button x:Name="btnClose" Content="Close" Margin="10,0,10,10" Click="btnClose_Click" Grid.Column="1" Height="45" VerticalAlignment="Bottom"/>
+        <Button x:Name="btnUpdateProduct" Content="Salveaza schimbarile" Margin="100,261,10,0" VerticalAlignment="Top" Height="39" Click="btnUpdateProducts" Grid.Column="1"/>
+        <ComboBox x:Name="cbStock" Grid.Column="1" HorizontalAlignment="Left" Margin="121,307,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbStock_SelectionChanged">
             <ComboBoxItem Content="In Stoc"/>
             <ComboBoxItem Content="Fara Stoc"/>
         </ComboBox>
-        <Label Grid.Column="1" Content="Disponibilitate:" HorizontalAlignment="Left" Margin="10,208,0,0" VerticalAlignment="Top" Height="30" Width="92"/>
+        <Label Grid.Column="1" Content="Disponibilitate:" HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top" Height="30" Width="92"/>
         <Label Grid.Column="1" Content="Total:" Margin="10,0,203,75" Height="26" VerticalAlignment="Bottom"/>
         <Label x:Name="lblSumValue" Grid.Column="1" Content="0" Margin="53,0,10,75" RenderTransformOrigin="-1.052,-0.322" Height="26" VerticalAlignment="Bottom"/>
-        <CheckBox x:Name="ckBeditMode" Grid.Column="1" Content="Edit On/Off" HorizontalAlignment="Left" Margin="10,143,0,0" VerticalAlignment="Top" Width="85" Checked="ckBeditMode_Checked" Unchecked="ckBeditMode_Unchecked"/>
+        <CheckBox x:Name="ckBeditMode" Grid.Column="1" Content="Edit On/Off" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top" Width="85" Checked="ckBeditMode_Checked" Unchecked="ckBeditMode_Unchecked"/>
+        <Button x:Name="btnChangeActiveStatus" IsEnabled="False" Content="Valideaza / Invalideaza produs" Margin="10,110,10,0" VerticalAlignment="Top" Height="47" Click="btnChangeActiveStatus_Click" Grid.Column="1"/>
+        <Button x:Name="btnSaveAsExcel" Content="Salveaza ca fisier Excel" Margin="10,162,10,0" VerticalAlignment="Top" Height="48" Click="btnSaveAsExcel_Click" Grid.Column="1"/>
     </Grid>
 </Window>

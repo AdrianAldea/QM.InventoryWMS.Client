@@ -1,6 +1,9 @@
-﻿using QM.Inventory.TunnelsClient;
+﻿using ExcelHelper;
+using Microsoft.Win32;
+using QM.Inventory.TunnelsClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -98,14 +101,50 @@ namespace QM.InventoryWMS.Controls {
         private void ckBeditMode_Checked(object sender, RoutedEventArgs e)
         {
             if(ckBeditMode.IsChecked == true)
+            {
                 dgProducts.IsReadOnly = false;
+                btnChangeActiveStatus.IsEnabled = false;
+            }
 
         }
 
         private void ckBeditMode_Unchecked(object sender, RoutedEventArgs e)
         {
             if (ckBeditMode.IsChecked == false)
+            {
                 dgProducts.IsReadOnly = true;
+                btnChangeActiveStatus.IsEnabled = true;
+            }
+        }
+
+        private async void btnChangeActiveStatus_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgProducts.SelectedIndex > -1)
+            {
+                if (dgProducts.SelectedItem is Product product)
+                {
+                    product.IsActive = !product.IsActive;
+                    var productList = new List<Product>
+                    {
+                        product
+                    };
+                    await TunnelsClient.UpdateAllProductsAsync(productList);
+                }
+            }
+            LoadProductsDataGrid();
+        }
+
+        private void btnSaveAsExcel_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = "Report " + DateTime.Now.ToString("yyyy-dd-MM HH-mm-ss");
+            saveFileDialog.DefaultExt = ".xlsx";
+            saveFileDialog.Filter = "Excel (*.xlsx)|*.xlsx";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                CreateExcelFile.CreateExcelDocument(Products, saveFileDialog.FileName, false);
+                Process.Start(new ProcessStartInfo { FileName = saveFileDialog.FileName, UseShellExecute = true });
+            }
         }
     }
 }
