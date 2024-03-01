@@ -142,7 +142,7 @@ namespace QM.InventoryWMS.Controls {
             saveFileDialog.Filter = "Excel (*.xlsx)|*.xlsx";
             if (saveFileDialog.ShowDialog() == true)
             {
-                CreateExcelFile.CreateExcelDocument(Products, saveFileDialog.FileName, false);
+                CreateExcelFile.CreateExcelDocument(dgProducts.ItemsSource.Cast<Product>().ToList(), saveFileDialog.FileName, false);
                 Process.Start(new ProcessStartInfo { FileName = saveFileDialog.FileName, UseShellExecute = true });
             }
         }
@@ -185,8 +185,8 @@ namespace QM.InventoryWMS.Controls {
                             FilterType = FilterTypeEnum.ByProductId,
                             OperationType = OperationTypeEnum.OUT
                         });
-                lblProfitValue.Content = (orders.Sum(x => x.TotalOrder) - (selectedProduct.BuyPrice * selectedProduct.InitialQuantity)).ToString("0.##");
-            }
+                lblProfitValue.Content = (orders.Sum(x => x.TotalProduct) - (selectedProduct.BuyPrice * selectedProduct.InitialQuantity)).ToString("0.##");
+            }   
         }
     }
 }
