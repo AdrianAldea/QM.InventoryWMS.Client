@@ -9,7 +9,8 @@ using System.Windows;
 using System.Windows.Controls;
 using Tunnels.Core.Models;
 
-namespace QM.InventoryWMS.Controls {
+namespace QM.InventoryWMS.Controls
+{
     /// <summary>
     /// Interaction logic for ProductsWindow.xaml
     /// </summary>
@@ -81,7 +82,10 @@ namespace QM.InventoryWMS.Controls {
         {
             var productList = dgProducts.Items.Cast<Product>();
             await TunnelsClient.UpdateAllProductsAsync(productList);
+            LoadProductsDataGrid();
         }
+
+       
 
         private void cbStock_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
